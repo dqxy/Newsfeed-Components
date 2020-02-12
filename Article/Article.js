@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'New Article 2020',
+    date: 'Jan 1st, 2020',
+    firstParagraph: `What is this paragraph `,
+
+    secondParagraph: `Where am I`,
+
+    thirdParagraph: `New content.`
   }
 ];
 
@@ -112,3 +121,47 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function articleCreator(title,date,p1,p2,p3){
+  const article = document.createElement('div');
+  const h2 = document.createElement('h2');
+  const datep = document.createElement('p');
+  const pp1 = document.createElement('p');
+  const pp2 = document.createElement('p');
+  const pp3 = document.createElement('p');
+  const expand = document.createElement('span');
+
+  article.appendChild(h2);
+  article.appendChild(datep);
+  article.appendChild(pp1);
+  article.appendChild(pp2);
+  article.appendChild(pp3);
+  article.appendChild(expand);
+
+  article.classList.add('article');
+  datep.classList.add('date');
+  pp1.classList.add('p1');
+  pp2.classList.add('p2');
+  pp3.classList.add('p3');
+  expand.classList.add('expandButton');
+
+
+  h2.textContent = title;
+  datep.textContent = date;
+  pp1.textContent = p1;
+  pp2.textContent = p2;
+  pp3.textContent = p3;
+  expand.textContent = 'Expand';
+
+
+  expand.addEventListener('click', (e) => {
+      article.classList.toggle('article-open');
+  });
+
+  return article;
+}
+
+const articles = document.querySelector('.articles');   
+data.reverse().map(data => {
+  articles.appendChild(articleCreator(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+})
